@@ -49,16 +49,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Edit file `.env` sesuaikan konfigurasi database:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=skripsi
-DB_USERNAME=root
-DB_PASSWORD=
-```
+Edit file `.env` sesuaikan konfigurasi database (DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD).
 
 ### 3. Migrasi database
 
