@@ -1,0 +1,2635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wireframe — SPK System</title>
+<style>
+  /* ─── Figma Wireframe Palette ─── */
+  :root {
+    --bg:        #F5F5F5;
+    --surface:   #FFFFFF;
+    --border:    #BDBDBD;
+    --border-dk: #757575;
+    --fill:      #E0E0E0;
+    --fill-dk:   #9E9E9E;
+    --text-hi:   #212121;
+    --text-md:   #616161;
+    --text-lo:   #9E9E9E;
+    --accent:    #616161;
+    --accent-lt: #E0E0E0;
+    --red-wf:    #BDBDBD;
+    --green-wf:  #BDBDBD;
+    --yellow-wf: #E0E0E0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: #EBEBEB;
+    color: var(--text-hi);
+    font-size: 13px;
+  }
+
+  /* ─── Outer shell ─── */
+  .wf-shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ─── Page title / label ─── */
+  .wf-page-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-lo);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .wf-page-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── Screen container ─── */
+  .wf-screen {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 56px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+
+  /* ─── App chrome: sidebar + topbar ─── */
+  .wf-chrome {
+    display: flex;
+    height: 540px;
+  }
+
+  .wf-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    background: var(--fill-dk);
+    border-right: 1.5px solid var(--border-dk);
+    display: flex;
+    flex-direction: column;
+  }
+  .wf-sidebar-logo {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-dk);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--surface);
+    letter-spacing: .04em;
+  }
+  .wf-sidebar-nav {
+    flex: 1;
+    padding: 8px 0;
+    overflow: hidden;
+  }
+  .wf-nav-item {
+    padding: 9px 16px;
+    font-size: 12px;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: default;
+  }
+  .wf-nav-item.active {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    margin: 0 8px;
+    padding: 9px 8px;
+  }
+  .wf-nav-icon {
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    opacity: .5;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .wf-sidebar-user {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border-dk);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wf-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--border-dk);
+    flex-shrink: 0;
+  }
+  .wf-user-info { flex: 1; }
+  .wf-user-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #e0e0e0;
+    line-height: 1.3;
+  }
+  .wf-user-role {
+    font-size: 10px;
+    color: #aaa;
+  }
+
+  /* ─── Main area ─── */
+  .wf-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .wf-topbar {
+    height: 48px;
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .wf-topbar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-hi);
+    flex: 1;
+  }
+  .wf-topbar-btn {
+    height: 28px;
+    padding: 0 12px;
+    background: var(--fill-dk);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--surface);
+    display: flex;
+    align-items: center;
+  }
+  .wf-content {
+    flex: 1;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ─── Wireframe primitives ─── */
+  .wf-box {
+    background: var(--fill);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+  }
+  .wf-box-dark {
+    background: var(--fill-dk);
+    border: 1.5px solid var(--border-dk);
+    border-radius: 4px;
+  }
+  .wf-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .wf-card-hd {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-md);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── Stats row ─── */
+  .wf-stats {
+    display: grid;
+    gap: 12px;
+  }
+  .wf-stat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--border-dk);
+    border-radius: 6px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wf-stat-label {
+    font-size: 10px;
+    color: var(--text-lo);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+  .wf-stat-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-hi);
+    line-height: 1;
+  }
+  .wf-stat-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--fill);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+  }
+
+  /* ─── Table ─── */
+  .wf-table-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .wf-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .wf-table thead tr {
+    background: var(--fill);
+    border-bottom: 1.5px solid var(--border);
+  }
+  .wf-table th {
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-md);
+    text-align: left;
+  }
+  .wf-table th.center, .wf-table td.center { text-align: center; }
+  .wf-table th.right, .wf-table td.right { text-align: right; }
+  .wf-table tbody tr {
+    border-bottom: 1px solid var(--fill);
+  }
+  .wf-table tbody tr:last-child { border-bottom: none; }
+  .wf-table td {
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--text-md);
+  }
+  .wf-table td strong { color: var(--text-hi); font-weight: 600; }
+  .wf-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--fill);
+    border: 1px solid var(--border);
+    color: var(--text-md);
+  }
+  .wf-pill-dk {
+    background: var(--fill-dk);
+    border-color: var(--border-dk);
+    color: var(--surface);
+  }
+
+  /* ─── Buttons ─── */
+  .wf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: default;
+    border: 1.5px solid var(--border-dk);
+    background: var(--fill-dk);
+    color: var(--surface);
+  }
+  .wf-btn-outline {
+    background: var(--surface);
+    color: var(--text-md);
+    border-color: var(--border);
+  }
+  .wf-btn-danger {
+    background: var(--fill);
+    color: var(--text-md);
+    border-color: var(--border);
+  }
+  .wf-btn-sm {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  /* ─── Form ─── */
+  .wf-field { margin-bottom: 12px; }
+  .wf-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-md);
+    margin-bottom: 4px;
+  }
+  .wf-input {
+    width: 100%;
+    height: 32px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    padding: 0 10px;
+    font-size: 11px;
+    color: var(--text-lo);
+    display: flex;
+    align-items: center;
+  }
+  .wf-textarea {
+    width: 100%;
+    height: 60px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+  .wf-select {
+    width: 100%;
+    height: 32px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--fill);
+    padding: 0 10px;
+    font-size: 11px;
+    color: var(--text-lo);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .wf-select-arrow { color: var(--border-dk); font-size: 9px; }
+
+  /* ─── Alert ─── */
+  .wf-alert {
+    background: var(--fill);
+    border: 1.5px solid var(--border-dk);
+    border-left: 4px solid var(--border-dk);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--text-md);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .wf-alert-icon {
+    width: 16px;
+    height: 16px;
+    background: var(--border-dk);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ─── Modal overlay ─── */
+  .wf-modal-wrap {
+    position: relative;
+    height: 540px;
+    overflow: hidden;
+  }
+  .wf-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .wf-modal {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    width: 380px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  }
+  .wf-modal-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-hi);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .wf-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── Login / guest page ─── */
+  .wf-guest-page {
+    min-height: 420px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .wf-guest-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 32px 28px;
+  }
+  .wf-guest-logo {
+    width: 64px;
+    height: 32px;
+    background: var(--fill-dk);
+    border-radius: 4px;
+    margin: 0 auto 20px;
+  }
+  .wf-guest-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-hi);
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .wf-guest-sub {
+    font-size: 11px;
+    color: var(--text-lo);
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* ─── Tabs ─── */
+  .wf-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1.5px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .wf-tab {
+    padding: 8px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-lo);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1.5px;
+    cursor: default;
+  }
+  .wf-tab.active {
+    color: var(--text-hi);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ─── Search / filter bar ─── */
+  .wf-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .wf-search {
+    flex: 1;
+    height: 30px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-lo);
+  }
+  .wf-search-icon {
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid var(--border-dk);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── Score bar ─── */
+  .wf-score-bar {
+    height: 6px;
+    background: var(--fill);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .wf-score-fill {
+    height: 100%;
+    background: var(--fill-dk);
+    border-radius: 3px;
+  }
+
+  /* ─── AHP matrix ─── */
+  .wf-matrix-cell {
+    width: 40px;
+    height: 28px;
+    background: var(--fill);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--text-md);
+    font-weight: 600;
+  }
+  .wf-matrix-cell.diag {
+    background: var(--fill-dk);
+    color: var(--surface);
+  }
+
+  /* ─── Page header ─── */
+  .doc-header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--border);
+  }
+  .doc-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-hi);
+    letter-spacing: -.02em;
+  }
+  .doc-sub {
+    font-size: 12px;
+    color: var(--text-lo);
+    margin-top: 6px;
+  }
+  .doc-badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-md);
+  }
+
+  /* grid helpers */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .flex-row { display: flex; gap: 8px; align-items: flex-start; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .mt-8 { margin-top: 8px; }
+  .mt-12 { margin-top: 12px; }
+  .mt-16 { margin-top: 16px; }
+  .w-full { width: 100%; }
+  .gap-8 { gap: 8px; }
+
+  /* annotation numbers */
+  .ann {
+    display: inline-flex;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--fill-dk);
+    color: var(--surface);
+    font-size: 9px;
+    font-weight: 800;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: 4px;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="wf-shell">
+
+  <!-- ══════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════ -->
+  <div class="doc-header">
+    <div class="doc-title">SPK System — Wireframe</div>
+    <div class="doc-sub">Sistem Pendukung Keputusan Pemilihan Supplier &amp; Manajemen Inventori</div>
+    <div class="doc-badge">Figma-style Lo-Fi Wireframe · 12 Screens</div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       01 · LOGIN
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">01 &mdash; Login</div>
+  <div class="wf-screen">
+    <div class="wf-guest-page">
+      <div class="wf-guest-card">
+        <div class="wf-guest-logo"></div>
+        <div class="wf-guest-title">SPK System</div>
+        <div class="wf-guest-sub">Masuk ke akun Anda</div>
+
+        <div class="wf-field">
+          <div class="wf-label">Email</div>
+          <div class="wf-input">user@example.com</div>
+        </div>
+        <div class="wf-field">
+          <div class="wf-label">Password</div>
+          <div class="wf-input">••••••••</div>
+        </div>
+
+        <div class="wf-btn w-full" style="width:100%;height:36px;border-radius:4px;">Sign in</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       02 · DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">02 &mdash; Dashboard</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <!-- Sidebar -->
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user">
+          <div class="wf-avatar"></div>
+          <div class="wf-user-info">
+            <div class="wf-user-name">Admin User</div>
+            <div class="wf-user-role">Super Admin</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Dashboard</div>
+        </div>
+        <div class="wf-content">
+          <!-- Alert -->
+          <div class="wf-alert">
+            <div class="wf-alert-icon"></div>
+            <span>⚠ 3 produk stok menipis — segera lakukan pembelian!</span>
+          </div>
+
+          <!-- KPI row 1: operasional -->
+          <div class="grid-3">
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">PO Menunggu</div><div class="wf-stat-val">5</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">Penjualan Hari Ini</div><div class="wf-stat-val">12 nota</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">Omzet Hari Ini</div><div class="wf-stat-val">Rp 4.2jt</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+          </div>
+
+          <!-- KPI row 2: risiko -->
+          <div class="grid-3">
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">Hampir Kadaluarsa</div><div class="wf-stat-val">7</div><div style="font-size:10px;color:var(--text-lo);">dalam 30 hari</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">Total Piutang</div><div class="wf-stat-val">Rp 2.1jt</div><div style="font-size:10px;color:var(--text-lo);">belum lunas</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+            <div class="wf-stat-card">
+              <div><div class="wf-stat-label">Customer Bermasalah</div><div class="wf-stat-val">3</div><div style="font-size:10px;color:var(--text-lo);">hutang &gt;30 hari</div></div>
+              <div class="wf-stat-icon"></div>
+            </div>
+          </div>
+
+          <!-- Table: hampir kadaluarsa -->
+          <div class="wf-table-wrap">
+            <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--text-md);">Barang Segera Kadaluarsa</div>
+            <table class="wf-table">
+              <thead><tr>
+                <th>Nama Barang</th><th class="center">Jumlah</th><th class="center">Kadaluarsa</th><th class="center">Sisa</th>
+              </tr></thead>
+              <tbody>
+                <tr><td><strong>Aqua 600ml</strong></td><td class="center">24</td><td class="center">20 Jun 2025</td><td class="center"><span class="wf-pill">15 hari</span></td></tr>
+                <tr><td><strong>Teh Botol</strong></td><td class="center">12</td><td class="center">25 Jun 2025</td><td class="center"><span class="wf-pill">20 hari</span></td></tr>
+                <tr><td><strong>LPG 3kg</strong></td><td class="center">6</td><td class="center">30 Jun 2025</td><td class="center"><span class="wf-pill">25 hari</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       03 · DATA SUPPLIER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">03 &mdash; Data Supplier</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Data Supplier</div>
+          <div class="wf-topbar-btn">+ Tambah Supplier</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr>
+                <th style="width:30px;">No</th>
+                <th>Nama Supplier</th>
+                <th class="center">Pelayanan</th>
+                <th class="center">Potongan Tunai</th>
+                <th class="center">Minimal Order</th>
+                <th class="center">Waktu Kirim</th>
+                <th class="right">Aksi</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td>1</td><td><strong>PT Sumber Jaya</strong></td>
+                  <td class="center"><span class="wf-pill">Sangat Bagus</span></td>
+                  <td class="center">3% - 5%</td><td class="center">1-2 Dus</td><td class="center">2 jam</td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span></td>
+                </tr>
+                <tr>
+                  <td>2</td><td><strong>CV Maju Bersama</strong></td>
+                  <td class="center"><span class="wf-pill">Bagus</span></td>
+                  <td class="center">1% - 3%</td><td class="center">5-10 Dus</td><td class="center">4 jam</td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span></td>
+                </tr>
+                <tr>
+                  <td>3</td><td><strong>UD Berkah Abadi</strong></td>
+                  <td class="center"><span class="wf-pill">Biasa Saja</span></td>
+                  <td class="center">0%</td><td class="center">Bisa Ecer</td><td class="center">6 jam</td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03b · Modal Tambah Supplier -->
+  <div class="wf-page-label">03b &mdash; Modal: Tambah / Edit Supplier</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap">
+      <!-- blurred bg -->
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal">
+          <div class="wf-modal-title">Tambah Supplier</div>
+          <div class="wf-field"><div class="wf-label">Nama Supplier</div><div class="wf-input">Nama supplier...</div></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin:14px 0 10px;padding-top:10px;border-top:1px solid var(--border);">Kriteria Supplier</div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Pelayanan</div>
+              <div class="wf-select"><span>— Pilih —</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Potongan Tunai</div>
+              <div class="wf-select"><span>— Pilih —</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Minimal Order</div>
+              <div class="wf-select"><span>— Pilih —</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Waktu Pengiriman (jam)</div>
+              <div class="wf-input">0</div>
+            </div>
+          </div>
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       04 · DATA PRODUK
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">04 &mdash; Data Produk</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Data Produk</div>
+          <div class="wf-topbar-btn">+ Tambah Produk</div>
+        </div>
+        <div class="wf-content">
+          <!-- Category group -->
+          <div class="wf-card">
+            <div class="wf-card-hd">AMDK (Air Minum Dalam Kemasan)</div>
+            <table class="wf-table">
+              <thead><tr><th style="width:30px;">No</th><th>Nama Produk</th><th class="center">Satuan</th><th class="center">Harga Jual</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>1</td><td><strong>Aqua Galon</strong></td><td class="center">Galon</td><td class="center">Rp 20.000</td>
+                  <td class="right" style="white-space:nowrap;">
+                    <span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:6px;">Edit</span>
+                    <span class="wf-btn wf-btn-outline wf-btn-sm" style="margin-right:4px;">Atur Supplier</span>
+                    <span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td><td><strong>Aqua 600ml</strong></td><td class="center">Dus</td><td class="center">Rp 38.000</td>
+                  <td class="right" style="white-space:nowrap;">
+                    <span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:6px;">Edit</span>
+                    <span class="wf-btn wf-btn-outline wf-btn-sm" style="margin-right:4px;">Atur Supplier</span>
+                    <span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="wf-card">
+            <div class="wf-card-hd">LPG</div>
+            <table class="wf-table">
+              <thead><tr><th style="width:30px;">No</th><th>Nama Produk</th><th class="center">Satuan</th><th class="center">Harga Jual</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>1</td><td><strong>Gas 12 kg</strong></td><td class="center">Tabung</td><td class="center">Rp 190.000</td>
+                  <td class="right" style="white-space:nowrap;">
+                    <span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:6px;">Edit</span>
+                    <span class="wf-btn wf-btn-outline wf-btn-sm" style="margin-right:4px;">Atur Supplier</span>
+                    <span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04b · Halaman Atur Supplier per Produk -->
+  <div class="wf-page-label">04b &mdash; Atur Supplier — Aqua Galon</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:580px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <!-- breadcrumb -->
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Data Produk</span>
+            <div class="wf-topbar-title" style="font-size:13px;">Atur Supplier — Aqua Galon</div>
+          </div>
+          <!-- info kanan -->
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;margin-left:auto;">
+            <span style="font-size:10px;color:var(--text-lo);">6 dari 15 supplier tersedia</span>
+            <span style="font-size:10px;color:var(--text-lo);">Rata-rata Harga Satuan: 17.990</span>
+          </div>
+        </div>
+        <div class="wf-content" style="padding:0;overflow:auto;">
+          <div class="wf-table-wrap" style="border-radius:0;border:none;">
+            <table class="wf-table" style="min-width:700px;">
+              <thead>
+                <tr>
+                  <th>NAMA SUPPLIER</th>
+                  <th class="center" style="width:110px;">TERSEDIA?</th>
+                  <th class="center">KUALITAS BARANG</th>
+                  <th class="center">HARGA SATUAN</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- tersedia / checked -->
+                <tr>
+                  <td><strong>Adi Jaya</strong></td>
+                  <td class="center">
+                    <div style="width:16px;height:16px;border:2px solid var(--border-dk);background:var(--fill-dk);border-radius:3px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+                      <span style="color:#fff;font-size:9px;font-weight:900;">✓</span>
+                    </div>
+                  </td>
+                  <td class="center">
+                    <div class="wf-select" style="width:160px;margin:0 auto;">
+                      <span style="font-size:10px;">★★★★☆ Biasa</span><span class="wf-select-arrow">▾</span>
+                    </div>
+                  </td>
+                  <td class="center"><div class="wf-input" style="width:100px;margin:0 auto;">18500</div></td>
+                </tr>
+                <tr>
+                  <td><strong>AHS Indah Jaya</strong></td>
+                  <td class="center">
+                    <div style="width:16px;height:16px;border:2px solid var(--border-dk);background:var(--fill-dk);border-radius:3px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+                      <span style="color:#fff;font-size:9px;font-weight:900;">✓</span>
+                    </div>
+                  </td>
+                  <td class="center">
+                    <div class="wf-select" style="width:160px;margin:0 auto;">
+                      <span style="font-size:10px;">★★★★☆ Biasa</span><span class="wf-select-arrow">▾</span>
+                    </div>
+                  </td>
+                  <td class="center"><div class="wf-input" style="width:100px;margin:0 auto;">17400</div></td>
+                </tr>
+                <tr>
+                  <td><strong>Rahayu</strong></td>
+                  <td class="center">
+                    <div style="width:16px;height:16px;border:2px solid var(--border-dk);background:var(--fill-dk);border-radius:3px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+                      <span style="color:#fff;font-size:9px;font-weight:900;">✓</span>
+                    </div>
+                  </td>
+                  <td class="center">
+                    <div class="wf-select" style="width:160px;margin:0 auto;">
+                      <span style="font-size:10px;">★★★★☆ Baik</span><span class="wf-select-arrow">▾</span>
+                    </div>
+                  </td>
+                  <td class="center"><div class="wf-input" style="width:100px;margin:0 auto;">17800</div></td>
+                </tr>
+                <!-- tidak tersedia / unchecked -->
+                <tr style="opacity:.5;">
+                  <td>Gembira</td>
+                  <td class="center"><div style="width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;margin:0 auto;"></div></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                </tr>
+                <tr style="opacity:.5;">
+                  <td>Haji Malik</td>
+                  <td class="center"><div style="width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;margin:0 auto;"></div></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                </tr>
+                <tr style="opacity:.5;">
+                  <td>Hansen</td>
+                  <td class="center"><div style="width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;margin:0 auto;"></div></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                  <td class="center"><span style="font-size:11px;color:var(--text-lo);">—</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- footer note + save -->
+          <div style="padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:10px;color:var(--text-lo);">⚠ Nilai yang berwarna merah melebihi 10% dari rata-rata supplier lain (khusus kriteria Cost).</span>
+            <div class="wf-btn">SIMPAN SEMUA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       05 · PEMBOBOTAN KRITERIA (SWARA)
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">05 &mdash; Pembobotan Kriteria (SWARA)</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:680px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Pembobotan Kriteria</div>
+          <div class="wf-topbar-btn">TAMBAH KRITERIA</div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+
+          <!-- ─ Tabel Daftar Kriteria ─ -->
+          <div class="wf-card" style="padding:0;">
+            <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+              <div style="font-size:12px;font-weight:700;color:var(--text-hi);">Daftar Kriteria</div>
+              <div style="font-size:10px;color:var(--text-lo);margin-top:2px;">Gunakan tombol panah untuk mengatur urutan prioritas kriteria.</div>
+            </div>
+            <table class="wf-table">
+              <thead>
+                <tr>
+                  <th style="width:40px;">NO</th>
+                  <th>NAMA KRITERIA</th>
+                  <th class="center">KATEGORI</th>
+                  <th class="center">TIPE</th>
+                  <th class="right">AKSI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="color:var(--text-lo);">1 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Kualitas Barang</strong></td>
+                  <td class="center"><span class="wf-pill">Produk</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#388e3c;">Benefit</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--text-lo);">2 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Harga Satuan</strong></td>
+                  <td class="center"><span class="wf-pill">Produk</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#c62828;">Cost</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--text-lo);">3 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Potongan Tunai</strong></td>
+                  <td class="center"><span class="wf-pill">Supplier</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#388e3c;">Benefit</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--text-lo);">4 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Minimal Order</strong></td>
+                  <td class="center"><span class="wf-pill">Supplier</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#c62828;">Cost</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--text-lo);">5 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Kecepatan Pengiriman</strong></td>
+                  <td class="center"><span class="wf-pill">Supplier</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#c62828;">Cost</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+                <tr>
+                  <td style="color:var(--text-lo);">6 <span style="font-size:9px;">↑↓</span></td>
+                  <td><strong>Pelayanan</strong></td>
+                  <td class="center"><span class="wf-pill">Supplier</span></td>
+                  <td class="center"><span class="wf-pill" style="color:#388e3c;">Benefit</span></td>
+                  <td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">HAPUS</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ─ Mode Lanjutan (SWARA) ─ -->
+          <div class="wf-card" style="padding:0;">
+            <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+              <div style="font-size:12px;font-weight:700;color:var(--text-hi);">Mode Lanjutan</div>
+              <div style="font-size:10px;color:var(--text-lo);margin-top:2px;">Atur tingkat kepentingan setiap kriteria secara manual dibandingkan kriteria di atasnya.</div>
+            </div>
+            <div style="display:flex;gap:0;">
+              <!-- tabel SWARA -->
+              <div style="flex:1;overflow:auto;">
+                <table class="wf-table">
+                  <thead>
+                    <tr>
+                      <th style="width:30px;">NO</th>
+                      <th>KRITERIA</th>
+                      <th style="width:220px;">PRIORITAS DIBANDING ATASNYA</th>
+                      <th class="center" style="width:140px;">BOBOT (PENGARUH)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Kualitas Barang</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin besar semakin baik</div>
+                      </td>
+                      <td>
+                        <span class="wf-pill wf-pill-dk" style="font-size:10px;">Paling Penting</span>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">21.0%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:100%;"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Harga Satuan</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin kecil semakin baik</div>
+                      </td>
+                      <td>
+                        <div class="wf-select" style="width:200px;">
+                          <span style="font-size:10px;">Sama Penting</span><span class="wf-select-arrow">▾</span>
+                        </div>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">21.0%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:100%;"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Potongan Tunai</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin besar semakin baik</div>
+                      </td>
+                      <td>
+                        <div class="wf-select" style="width:200px;">
+                          <span style="font-size:10px;">Sama Penting</span><span class="wf-select-arrow">▾</span>
+                        </div>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">21.0%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:100%;"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Minimal Order</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin kecil semakin baik</div>
+                      </td>
+                      <td>
+                        <div class="wf-select" style="width:200px;">
+                          <span style="font-size:10px;">Kurang Penting</span><span class="wf-select-arrow">▾</span>
+                        </div>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">16.8%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:80%;"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Kecepatan Pengiriman</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin kecil semakin baik</div>
+                      </td>
+                      <td>
+                        <div class="wf-select" style="width:200px;">
+                          <span style="font-size:10px;">Kurang Penting</span><span class="wf-select-arrow">▾</span>
+                        </div>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">13.4%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:64%;"></div></div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>
+                        <div style="font-size:11px;font-weight:600;">Pelayanan</div>
+                        <div style="font-size:10px;color:var(--text-lo);">Semakin besar semakin baik</div>
+                      </td>
+                      <td>
+                        <div class="wf-select" style="width:200px;">
+                          <span style="font-size:10px;">Sangat Kurang Penting</span><span class="wf-select-arrow">▾</span>
+                        </div>
+                      </td>
+                      <td class="center">
+                        <div style="font-size:12px;font-weight:700;color:var(--text-hi);">6.7%</div>
+                        <div class="wf-score-bar" style="margin-top:4px;"><div class="wf-score-fill" style="width:32%;"></div></div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pie chart placeholder -->
+              <div style="width:200px;flex-shrink:0;border-left:1px solid var(--border);padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text-md);text-align:center;">Distribusi Bobot</div>
+                <!-- pseudo pie chart -->
+                <div style="width:90px;height:90px;border-radius:50%;background:conic-gradient(#616161 0% 21%,#9E9E9E 21% 42%,#BDBDBD 42% 63%,#757575 63% 79.8%,#E0E0E0 79.8% 93.2%,#424242 93.2% 100%);flex-shrink:0;"></div>
+                <div style="width:100%;display:flex;flex-direction:column;gap:4px;">
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#616161;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Kualitas (21.0%)</span></div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#9E9E9E;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Harga (21.0%)</span></div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#BDBDBD;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Potongan (21.0%)</span></div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#757575;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Min. Order (16.8%)</span></div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#E0E0E0;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Kec. Kirim (13.4%)</span></div>
+                  <div style="display:flex;align-items:center;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#424242;flex-shrink:0;"></div><span style="font-size:9px;color:var(--text-md);">Pelayanan (6.7%)</span></div>
+                </div>
+                <div style="font-size:9px;color:var(--text-lo);text-align:center;margin-top:4px;border-top:1px solid var(--border);padding-top:8px;width:100%;">
+                  <strong>Kualitas Barang</strong> menjadi faktor penentu utama (21.0%) dalam memilih supplier.
+                </div>
+              </div>
+            </div>
+
+            <!-- footer save -->
+            <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;">
+              <div class="wf-btn">SIMPAN BOBOT</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       06 · REKOMENDASI ORDER (WASPAS)
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">06 &mdash; Rekomendasi Order</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:620px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Rekomendasi Order</div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+
+          <!-- ─ Card: Pilih Produk ─ -->
+          <div class="wf-card" style="padding:0;">
+            <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+              <div style="font-size:12px;font-weight:700;color:var(--text-hi);">Pilih Produk yang Ingin Dibeli</div>
+              <div style="font-size:10px;color:var(--text-lo);margin-top:2px;">Sistem akan mencari supplier terbaik berdasarkan kriteria dan bobot yang sudah ditetapkan.</div>
+            </div>
+            <div style="padding:16px;display:flex;gap:10px;align-items:flex-end;">
+              <div style="flex:1;">
+                <div class="wf-select" style="height:34px;">
+                  <span style="font-size:11px;color:var(--text-lo);">— Pilih Produk —</span>
+                  <span class="wf-select-arrow">▾</span>
+                </div>
+              </div>
+              <div class="wf-btn" style="height:34px;padding:0 16px;white-space:nowrap;">🔍 Cari Supplier Terbaik</div>
+            </div>
+          </div>
+
+          <!-- ─ Card: Prioritas Kriteria ─ -->
+          <div class="wf-card" style="padding:0;">
+            <div style="padding:10px 16px;border-bottom:1px solid var(--border);">
+              <div style="font-size:12px;font-weight:700;color:var(--text-hi);">Prioritas Kriteria Saat Ini</div>
+            </div>
+            <div style="padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;">
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">1.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Kualitas Barang</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">21.0%</span>
+                <span style="font-size:9px;color:#388e3c;font-weight:600;">Benefit</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">2.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Harga Satuan</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">21.0%</span>
+                <span style="font-size:9px;color:#c62828;font-weight:600;">Cost</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">3.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Potongan Tunai</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">21.0%</span>
+                <span style="font-size:9px;color:#388e3c;font-weight:600;">Benefit</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">4.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Minimal Order</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">16.8%</span>
+                <span style="font-size:9px;color:#c62828;font-weight:600;">Cost</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">5.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Kecepatan Pengiriman</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">13.4%</span>
+                <span style="font-size:9px;color:#c62828;font-weight:600;">Cost</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1.5px solid var(--border);border-radius:6px;background:var(--fill);">
+                <span style="font-size:10px;font-weight:700;color:var(--text-md);">6.</span>
+                <span style="font-size:11px;font-weight:600;color:var(--text-hi);">Pelayanan</span>
+                <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;background:var(--fill-dk);color:#fff;">6.7%</span>
+                <span style="font-size:9px;color:#388e3c;font-weight:600;">Benefit</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ─ Card: Hasil Ranking (setelah produk dipilih) ─ -->
+          <div class="wf-card" style="padding:0;">
+            <div style="padding:10px 16px;border-bottom:1px solid var(--border);">
+              <div style="font-size:12px;font-weight:700;color:var(--text-hi);">Hasil Ranking — Aqua Galon</div>
+              <div style="font-size:10px;color:var(--text-lo);margin-top:2px;">Supplier diurutkan berdasarkan skor WASPAS tertinggi (metode gabungan WSM + WPM, λ = 0.5).</div>
+            </div>
+            <table class="wf-table">
+              <thead>
+                <tr>
+                  <th style="width:70px;">RANKING</th>
+                  <th>NAMA SUPPLIER</th>
+                  <th class="center">SKOR AKHIR (Qi)</th>
+                  <th class="right">HARGA SATUAN</th>
+                  <th class="center">JAM KIRIM</th>
+                  <th class="center">PELAYANAN</th>
+                  <th class="center">STATUS</th>
+                  <th class="center">AKSI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- rank 1 — highlight -->
+                <tr style="background:var(--fill);">
+                  <td><span style="font-size:13px;font-weight:800;">🏆 1</span></td>
+                  <td><strong>Rahayu</strong></td>
+                  <td class="center"><span style="font-weight:700;color:var(--text-hi);">0.8142</span></td>
+                  <td class="right">Rp 17.800</td>
+                  <td class="center">2 Jam</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Baik</span></td>
+                  <td class="center"><span class="wf-pill wf-pill-dk" style="font-size:10px;">Rekomendasi Utama</span></td>
+                  <td class="center"><div class="wf-btn wf-btn-sm" style="background:var(--border-dk);font-size:10px;">🛒 Buat PO</div></td>
+                </tr>
+                <tr>
+                  <td><span style="font-size:12px;font-weight:700;">2</span></td>
+                  <td><strong>AHS Indah Jaya</strong></td>
+                  <td class="center"><span style="font-weight:600;color:var(--text-md);">0.7531</span></td>
+                  <td class="right">Rp 17.400</td>
+                  <td class="center">3 Jam</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Biasa</span></td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Alternatif</span></td>
+                  <td class="center"><div class="wf-btn wf-btn-outline wf-btn-sm" style="font-size:10px;">🛒 Buat PO</div></td>
+                </tr>
+                <tr>
+                  <td><span style="font-size:12px;font-weight:700;">3</span></td>
+                  <td><strong>Adi Jaya</strong></td>
+                  <td class="center"><span style="font-weight:600;color:var(--text-md);">0.6894</span></td>
+                  <td class="right">Rp 18.500</td>
+                  <td class="center">4 Jam</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Biasa</span></td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Alternatif</span></td>
+                  <td class="center"><div class="wf-btn wf-btn-outline wf-btn-sm" style="font-size:10px;">🛒 Buat PO</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       07 · PEMBELIAN (Purchase Orders)
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">07 &mdash; Pembelian (Purchase Orders)</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Pembelian</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-tabs">
+            <div class="wf-tab active">Semua</div>
+            <div class="wf-tab">Draft</div>
+            <div class="wf-tab">Diterima</div>
+            <div class="wf-tab">Dibatalkan</div>
+          </div>
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>No. PO</th><th>Supplier</th><th>Produk</th><th class="center">Jumlah</th><th class="center">Total</th><th class="center">Status</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>PO-001</strong></td><td>PT Sumber Jaya</td><td>Aqua 600ml</td><td class="center">10 dus</td><td class="center">Rp 380.000</td>
+                  <td class="center"><span class="wf-pill">Draft</span></td>
+                  <td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm" style="margin-right:4px;">Detail</span><span class="wf-btn wf-btn-sm">Terima</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PO-002</strong></td><td>UD Berkah Abadi</td><td>LPG 3kg</td><td class="center">20 tabung</td><td class="center">Rp 440.000</td>
+                  <td class="center"><span class="wf-pill wf-pill-dk">Diterima</span></td>
+                  <td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td>
+                </tr>
+                <tr>
+                  <td><strong>PO-003</strong></td><td>CV Maju Bersama</td><td>Teh Botol</td><td class="center">5 dus</td><td class="center">Rp 175.000</td>
+                  <td class="center"><span class="wf-pill">Draft</span></td>
+                  <td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm" style="margin-right:4px;">Detail</span><span class="wf-btn wf-btn-sm">Terima</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       08 · PENJUALAN
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">08 &mdash; Penjualan</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Penjualan</div>
+          <div class="wf-topbar-btn">+ Tambah Nota</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-toolbar">
+            <div class="wf-search"><div class="wf-search-icon"></div>Cari nota...</div>
+            <div class="wf-select" style="width:130px;"><span>Semua Tipe</span><span class="wf-select-arrow">▾</span></div>
+            <div class="wf-select" style="width:130px;"><span>Semua Tanggal</span><span class="wf-select-arrow">▾</span></div>
+          </div>
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>No. Nota</th><th>Customer</th><th class="center">Tipe</th><th class="center">Total</th><th class="center">Tanggal</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr><td><strong>N-001</strong></td><td>Budi Santoso</td><td class="center"><span class="wf-pill">Tunai</span></td><td class="center">Rp 95.000</td><td class="center">17 Mei 2025</td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+                <tr><td><strong>N-002</strong></td><td>Dewi Rahayu</td><td class="center"><span class="wf-pill wf-pill-dk">Kredit</span></td><td class="center">Rp 210.000</td><td class="center">17 Mei 2025</td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+                <tr><td><strong>N-003</strong></td><td>Agus Firmansyah</td><td class="center"><span class="wf-pill">Tunai</span></td><td class="center">Rp 44.000</td><td class="center">16 Mei 2025</td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       09 · KASBON (Customer & Piutang)
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">09 &mdash; Kasbon</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Kasbon</div>
+          <div class="wf-topbar-btn">+ Tambah Customer</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-tabs">
+            <div class="wf-tab active">Semua</div>
+            <div class="wf-tab">Punya Hutang</div>
+            <div class="wf-tab">Blacklist</div>
+          </div>
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>Nama</th><th class="center">Total Hutang</th><th class="center">Aging</th><th class="center">Status</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Budi Santoso</strong></td><td class="center">Rp 210.000</td><td class="center"><span class="wf-pill">&lt; 1 minggu</span></td><td class="center"><span class="wf-pill">Aktif</span></td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+                <tr><td><strong>Dewi Rahayu</strong></td><td class="center">Rp 850.000</td><td class="center"><span class="wf-pill wf-pill-dk">&gt; 1 bulan</span></td><td class="center"><span class="wf-pill wf-pill-dk">Blacklist</span></td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+                <tr><td><strong>Agus Firmansyah</strong></td><td class="center">Rp 0</td><td class="center">—</td><td class="center"><span class="wf-pill">Aktif</span></td><td class="right"><span class="wf-btn wf-btn-outline wf-btn-sm">Detail</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       10 · STOK
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">10 &mdash; Stok</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Stok</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-tabs">
+            <div class="wf-tab active">Semua</div>
+            <div class="wf-tab">Hampir Kadaluarsa</div>
+            <div class="wf-tab">Sudah Kadaluarsa</div>
+            <div class="wf-tab">Stok Menipis</div>
+          </div>
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>Nama Barang</th><th class="center">Jumlah</th><th class="center">Satuan</th><th class="center">Tgl. Kadaluarsa</th><th class="center">Status</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Aqua 600ml</strong></td><td class="center">48</td><td class="center">Dus</td><td class="center">20 Jun 2025</td><td class="center"><span class="wf-pill">Normal</span></td></tr>
+                <tr><td><strong>Teh Botol</strong></td><td class="center">6</td><td class="center">Dus</td><td class="center">25 Jun 2025</td><td class="center"><span class="wf-pill wf-pill-dk">Menipis</span></td></tr>
+                <tr><td><strong>LPG 3kg</strong></td><td class="center">15</td><td class="center">Tabung</td><td class="center">30 Jun 2025</td><td class="center"><span class="wf-pill">Normal</span></td></tr>
+                <tr><td><strong>Aqua 1500ml</strong></td><td class="center">3</td><td class="center">Dus</td><td class="center">10 Mei 2025</td><td class="center"><span class="wf-pill wf-pill-dk">Kadaluarsa</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       11 · LAPORAN
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">11 &mdash; Laporan</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Laporan</div>
+        </div>
+        <div class="wf-content">
+          <div class="grid-2" style="align-items:start;">
+            <!-- Filter -->
+            <div class="wf-card">
+              <div class="wf-card-hd">Filter Laporan</div>
+              <div class="wf-field"><div class="wf-label">Jenis Laporan</div>
+                <div class="wf-select"><span>Laporan Pembelian</span><span class="wf-select-arrow">▾</span></div>
+              </div>
+              <div class="grid-2">
+                <div class="wf-field"><div class="wf-label">Dari Tanggal</div><div class="wf-input">01/05/2025</div></div>
+                <div class="wf-field"><div class="wf-label">Sampai Tanggal</div><div class="wf-input">31/05/2025</div></div>
+              </div>
+              <div class="wf-field"><div class="wf-label">Supplier (opsional)</div>
+                <div class="wf-select"><span>Semua Supplier</span><span class="wf-select-arrow">▾</span></div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px;">
+                <div class="wf-btn" style="flex:1;justify-content:center;">Tampilkan</div>
+                <div class="wf-btn wf-btn-outline" style="flex:1;justify-content:center;">Export Excel</div>
+              </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="wf-card">
+              <div class="wf-card-hd">Ringkasan</div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="flex-between"><span style="font-size:11px;color:var(--text-md);">Total Transaksi</span><strong style="font-size:13px;">18</strong></div>
+                <div class="flex-between"><span style="font-size:11px;color:var(--text-md);">Total Nilai</span><strong style="font-size:13px;">Rp 4.200.000</strong></div>
+                <div class="flex-between"><span style="font-size:11px;color:var(--text-md);">Rata-rata / Transaksi</span><strong style="font-size:13px;">Rp 233.333</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table hasil -->
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>No. PO</th><th>Supplier</th><th>Produk</th><th class="center">Jumlah</th><th class="center">Total</th><th class="center">Tanggal</th></tr></thead>
+              <tbody>
+                <tr><td><strong>PO-002</strong></td><td>UD Berkah Abadi</td><td>LPG 3kg</td><td class="center">20 tabung</td><td class="center">Rp 440.000</td><td class="center">10 Mei 2025</td></tr>
+                <tr><td><strong>PO-004</strong></td><td>PT Sumber Jaya</td><td>Aqua 600ml</td><td class="center">30 dus</td><td class="center">Rp 1.140.000</td><td class="center">12 Mei 2025</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       12 · MANAJEMEN USER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">12 &mdash; Manajemen User (Super Admin only)</div>
+  <div class="wf-screen">
+    <div class="wf-chrome">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Manajemen User</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div class="wf-topbar-title">Manajemen User</div>
+          <div class="wf-topbar-btn">+ Tambah User</div>
+        </div>
+        <div class="wf-content">
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr><th>Nama</th><th>Email</th><th class="center">Role</th><th class="center">Bergabung</th><th class="right">Aksi</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Admin Utama</strong></td><td>admin@spk.id</td><td class="center"><span class="wf-pill wf-pill-dk">Super Admin</span></td><td class="center">Jan 2025</td><td class="right">—</td></tr>
+                <tr><td><strong>Kasir 1</strong></td><td>kasir1@spk.id</td><td class="center"><span class="wf-pill">Admin</span></td><td class="center">Feb 2025</td><td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span></td></tr>
+                <tr><td><strong>Kasir 2</strong></td><td>kasir2@spk.id</td><td class="center"><span class="wf-pill">Admin</span></td><td class="center">Mar 2025</td><td class="right"><span style="font-size:11px;color:var(--text-md);text-decoration:underline;margin-right:8px;">Edit</span><span class="wf-btn wf-btn-danger wf-btn-sm">Hapus</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       13 · FORM TAMBAH / EDIT PRODUK
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">13 &mdash; Form Tambah / Edit Produk</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:340px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Data Produk</span>
+            <div class="wf-topbar-title">Tambah Produk</div>
+          </div>
+        </div>
+        <div class="wf-content" style="align-items:center;">
+          <div class="wf-card" style="max-width:540px;width:100%;">
+            <div class="wf-field">
+              <div class="wf-label">Nama Produk</div>
+              <div class="wf-input" style="color:var(--text-lo);">Nama produk...</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Kategori</div>
+              <div class="wf-select"><span style="color:var(--text-lo);">— Pilih Kategori —</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div style="font-size:10px;color:var(--text-lo);margin-bottom:12px;">
+              Contoh: Air Mineral (AMDK), Minuman Rasa &amp; Isotonik, Gas Elpiji, ...
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:8px;border-top:1px solid var(--border);">
+              <div class="wf-btn wf-btn-outline">Batal</div>
+              <div class="wf-btn">Simpan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       14a · MODAL TAMBAH KRITERIA — TIPE BENEFIT
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">14a &mdash; Modal Tambah Kriteria — Tipe Benefit</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap" style="height:520px;">
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal" style="width:420px;">
+          <div class="wf-modal-title">Tambah Kriteria</div>
+          <div class="wf-field">
+            <div class="wf-label">Nama Kriteria</div>
+            <div class="wf-input">Kualitas Barang</div>
+          </div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Kategori</div>
+              <div class="wf-select"><span>Produk</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Tipe</div>
+              <div class="wf-select"><span>Benefit</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+          </div>
+          <!-- Label skala muncul kalau tipe = benefit -->
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin:10px 0 8px;padding-top:8px;border-top:1px solid var(--border);">
+            Label Skala Penilaian (Benefit)
+          </div>
+          <div style="font-size:10px;color:var(--text-lo);margin-bottom:8px;">Isi label untuk setiap tingkat nilai 1–5.</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:16px;font-size:11px;font-weight:700;color:var(--text-md);flex-shrink:0;">5</span>
+              <div class="wf-input" style="flex:1;">Sangat Baik</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:16px;font-size:11px;font-weight:700;color:var(--text-md);flex-shrink:0;">4</span>
+              <div class="wf-input" style="flex:1;">Baik</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:16px;font-size:11px;font-weight:700;color:var(--text-md);flex-shrink:0;">3</span>
+              <div class="wf-input" style="flex:1;">Biasa</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:16px;font-size:11px;font-weight:700;color:var(--text-md);flex-shrink:0;">2</span>
+              <div class="wf-input" style="flex:1;">Buruk</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="width:16px;font-size:11px;font-weight:700;color:var(--text-md);flex-shrink:0;">1</span>
+              <div class="wf-input" style="flex:1;">Sangat Buruk</div>
+            </div>
+          </div>
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       14b · MODAL TAMBAH KRITERIA — TIPE COST
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">14b &mdash; Modal Tambah Kriteria — Tipe Cost</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap" style="height:320px;">
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal" style="width:420px;">
+          <div class="wf-modal-title">Tambah Kriteria</div>
+          <div class="wf-field">
+            <div class="wf-label">Nama Kriteria</div>
+            <div class="wf-input">Harga Satuan</div>
+          </div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Kategori</div>
+              <div class="wf-select"><span>Produk</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Tipe</div>
+              <div class="wf-select"><span>Cost</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+          </div>
+          <!-- Tidak ada label skala untuk tipe cost -->
+          <div style="padding:10px 12px;background:var(--fill);border-radius:4px;font-size:10px;color:var(--text-md);margin-top:4px;">
+            Kriteria bertipe <strong>Cost</strong> menggunakan nilai numerik langsung (contoh: harga, waktu dalam jam). Label skala tidak diperlukan.
+          </div>
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       15 · MODAL BUAT PURCHASE ORDER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">15 &mdash; Modal Buat Purchase Order</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap" style="height:580px;">
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;background:var(--bg);"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal" style="width:600px;max-height:520px;overflow-y:auto;">
+          <div class="wf-modal-title">Buat Purchase Order</div>
+
+          <!-- Seksi 1: Info PO -->
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin-bottom:8px;">Informasi PO</div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Nomor PO</div>
+              <div class="wf-input" style="background:var(--fill);color:var(--text-lo);">PO-20250517-001</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Tanggal PO</div>
+              <div class="wf-input">17/05/2025</div>
+            </div>
+          </div>
+          <div class="wf-field">
+            <div class="wf-label">Supplier</div>
+            <div class="wf-select"><span style="color:var(--text-lo);">— Pilih Supplier —</span><span class="wf-select-arrow">▾</span></div>
+          </div>
+          <div class="wf-field">
+            <div class="wf-label">Keterangan (opsional)</div>
+            <div class="wf-textarea"></div>
+          </div>
+
+          <!-- Seksi 2: Daftar Barang -->
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin:12px 0 8px;padding-top:10px;border-top:1px solid var(--border);">Daftar Barang</div>
+          <table class="wf-table" style="margin-bottom:8px;">
+            <thead><tr>
+              <th>Nama Barang</th>
+              <th class="center" style="width:70px;">Jumlah</th>
+              <th class="right" style="width:110px;">Harga Satuan</th>
+              <th class="center" style="width:110px;">Tgl Kadaluarsa</th>
+              <th class="right" style="width:90px;">Subtotal</th>
+              <th style="width:30px;"></th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="wf-select"><span style="color:var(--text-lo);font-size:10px;">— Pilih Barang —</span><span class="wf-select-arrow">▾</span></div>
+                </td>
+                <td class="center"><div class="wf-input" style="width:50px;margin:0 auto;text-align:center;">1</div></td>
+                <td class="right"><div class="wf-input" style="width:90px;margin-left:auto;">0</div></td>
+                <td class="center"><div class="wf-input" style="width:90px;margin:0 auto;font-size:10px;"></div></td>
+                <td class="right" style="font-size:11px;color:var(--text-lo);">Rp 0</td>
+                <td class="center"><span style="font-size:12px;color:var(--text-lo);cursor:default;">×</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-bottom:10px;">
+            <div class="wf-btn wf-btn-outline wf-btn-sm">+ Tambah Baris</div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;padding:8px 0;border-top:1px solid var(--border);">
+            <span style="font-size:12px;font-weight:700;color:var(--text-hi);">Total: Rp 0</span>
+          </div>
+
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan PO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       16 · HALAMAN DETAIL PURCHASE ORDER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">16 &mdash; Detail Purchase Order</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:560px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Pembelian</span>
+            <div class="wf-topbar-title">Detail PO — PO-20250517-001</div>
+          </div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+
+          <!-- Info card -->
+          <div class="wf-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div class="wf-card-hd" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Informasi PO</div>
+              <span class="wf-pill">Draft</span>
+            </div>
+            <div class="grid-2" style="gap:10px;">
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">NOMOR PO</div><div style="font-size:12px;font-weight:600;">PO-20250517-001</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">TANGGAL PO</div><div style="font-size:12px;">17 Mei 2025</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">SUPPLIER</div><div style="font-size:12px;font-weight:600;">Rahayu</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">PRODUK REFERENSI</div><div style="font-size:12px;">Aqua Galon</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">KETERANGAN</div><div style="font-size:12px;color:var(--text-lo);">—</div></div>
+            </div>
+          </div>
+
+          <!-- Alert aksi (status draft) -->
+          <div class="wf-alert" style="justify-content:space-between;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div class="wf-alert-icon"></div>
+              <span style="font-size:11px;">PO ini masih berstatus <strong>Draft</strong>. Konfirmasi penerimaan barang untuk memperbarui stok.</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-shrink:0;">
+              <div class="wf-btn wf-btn-danger wf-btn-sm">Batalkan PO</div>
+              <div class="wf-btn wf-btn-sm">Terima Barang</div>
+            </div>
+          </div>
+
+          <!-- Tabel item -->
+          <div class="wf-table-wrap">
+            <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--text-md);">Daftar Barang</div>
+            <table class="wf-table">
+              <thead><tr>
+                <th>Nama Barang</th>
+                <th class="center">Jumlah</th>
+                <th class="right">Harga Satuan</th>
+                <th class="center">Tgl Kadaluarsa</th>
+                <th class="right">Subtotal</th>
+              </tr></thead>
+              <tbody>
+                <tr><td><strong>Aqua Galon</strong></td><td class="center">10</td><td class="right">Rp 17.800</td><td class="center">17 Mei 2026</td><td class="right">Rp 178.000</td></tr>
+                <tr><td><strong>Aqua Galon</strong></td><td class="center">5</td><td class="right">Rp 17.800</td><td class="center">20 Jun 2026</td><td class="right">Rp 89.000</td></tr>
+              </tbody>
+              <tfoot>
+                <tr style="border-top:1.5px solid var(--border-dk);">
+                  <td colspan="4" style="padding:8px 12px;font-size:11px;font-weight:700;text-align:right;color:var(--text-hi);">Total Harga PO</td>
+                  <td class="right" style="padding:8px 12px;font-size:12px;font-weight:800;color:var(--text-hi);">Rp 267.000</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       17 · MODAL CATAT PENJUALAN
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">17 &mdash; Modal Catat Penjualan</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap" style="height:620px;">
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;background:var(--bg);"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal" style="width:640px;max-height:560px;overflow-y:auto;">
+          <div class="wf-modal-title">Catat Penjualan</div>
+
+          <!-- Seksi 1: Info Transaksi -->
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin-bottom:8px;">Informasi Transaksi</div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Nomor Nota</div>
+              <div class="wf-input" style="background:var(--fill);color:var(--text-lo);">NOTA-20250517-001</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Tanggal Penjualan</div>
+              <div class="wf-input">17/05/2025</div>
+            </div>
+          </div>
+
+          <!-- Jenis Pembayaran radio -->
+          <div class="wf-field">
+            <div class="wf-label">Jenis Pembayaran</div>
+            <div style="display:flex;gap:16px;margin-top:4px;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:default;">
+                <div style="width:14px;height:14px;border-radius:50%;border:2px solid var(--border-dk);background:var(--fill-dk);display:flex;align-items:center;justify-content:center;">
+                  <div style="width:6px;height:6px;border-radius:50%;background:#fff;"></div>
+                </div>
+                Tunai
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:11px;cursor:default;">
+                <div style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);"></div>
+                Kredit (Kasbon)
+              </label>
+            </div>
+          </div>
+
+          <div class="wf-field">
+            <div class="wf-label">Customer (opsional untuk tunai)</div>
+            <div class="wf-select"><span style="color:var(--text-lo);">— Pilih Customer —</span><span class="wf-select-arrow">▾</span></div>
+          </div>
+          <div class="wf-field">
+            <div class="wf-label">Keterangan (opsional)</div>
+            <div class="wf-textarea"></div>
+          </div>
+
+          <!-- Seksi 2: Pilih Barang -->
+          <div style="font-size:11px;font-weight:700;color:var(--text-md);margin:12px 0 8px;padding-top:10px;border-top:1px solid var(--border);">Pilih Barang</div>
+          <!-- Baris tambah barang -->
+          <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:8px;">
+            <div style="flex:2;">
+              <div class="wf-label" style="margin-bottom:4px;">Stok Barang</div>
+              <div class="wf-select"><span style="color:var(--text-lo);font-size:10px;">— Pilih Stok —</span><span class="wf-select-arrow">▾</span></div>
+            </div>
+            <div style="width:60px;">
+              <div class="wf-label" style="margin-bottom:4px;">Jumlah</div>
+              <div class="wf-input" style="text-align:center;">1</div>
+            </div>
+            <div style="width:100px;">
+              <div class="wf-label" style="margin-bottom:4px;">Harga Satuan</div>
+              <div class="wf-input">0</div>
+            </div>
+            <div class="wf-btn wf-btn-sm" style="flex-shrink:0;height:32px;">+ Tambah</div>
+          </div>
+
+          <!-- Tabel item yang sudah ditambah -->
+          <table class="wf-table" style="margin-bottom:6px;">
+            <thead><tr>
+              <th>Nama Barang</th>
+              <th class="center" style="width:60px;">Jumlah</th>
+              <th class="right" style="width:100px;">Harga Satuan</th>
+              <th class="right" style="width:90px;">Subtotal</th>
+              <th style="width:30px;"></th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td>Aqua 600ml</td>
+                <td class="center">5</td>
+                <td class="right">Rp 4.000</td>
+                <td class="right">Rp 20.000</td>
+                <td class="center"><span style="font-size:12px;color:var(--text-lo);">×</span></td>
+              </tr>
+              <tr>
+                <td>Teh Pucuk</td>
+                <td class="center">3</td>
+                <td class="right">Rp 5.000</td>
+                <td class="right">Rp 15.000</td>
+                <td class="center"><span style="font-size:12px;color:var(--text-lo);">×</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="display:flex;justify-content:flex-end;padding:6px 0;border-top:1px solid var(--border);">
+            <span style="font-size:12px;font-weight:700;color:var(--text-hi);">Total: Rp 35.000</span>
+          </div>
+
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan Transaksi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       18 · HALAMAN DETAIL PENJUALAN
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">18 &mdash; Detail Penjualan</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:500px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Penjualan</span>
+            <div class="wf-topbar-title">Detail Nota — NOTA-20250517-001</div>
+          </div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+          <div class="wf-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div class="wf-card-hd" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Informasi Transaksi</div>
+              <span class="wf-pill">Tunai</span>
+            </div>
+            <div class="grid-2" style="gap:10px;">
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">NOMOR NOTA</div><div style="font-size:12px;font-weight:600;">NOTA-20250517-001</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">TANGGAL</div><div style="font-size:12px;">17 Mei 2025</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">CUSTOMER</div><div style="font-size:12px;">Budi Santoso</div></div>
+              <div><div style="font-size:10px;color:var(--text-lo);margin-bottom:2px;">TOTAL</div><div style="font-size:13px;font-weight:700;">Rp 35.000</div></div>
+            </div>
+          </div>
+          <div class="wf-table-wrap">
+            <div style="padding:10px 14px;border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--text-md);">Item Penjualan</div>
+            <table class="wf-table">
+              <thead><tr>
+                <th>Nama Barang</th>
+                <th class="center">Jumlah</th>
+                <th class="right">Harga Satuan</th>
+                <th class="right">Subtotal</th>
+              </tr></thead>
+              <tbody>
+                <tr><td>Aqua 600ml</td><td class="center">5</td><td class="right">Rp 4.000</td><td class="right">Rp 20.000</td></tr>
+                <tr><td>Teh Pucuk</td><td class="center">3</td><td class="right">Rp 5.000</td><td class="right">Rp 15.000</td></tr>
+              </tbody>
+              <tfoot>
+                <tr style="border-top:1.5px solid var(--border-dk);">
+                  <td colspan="3" style="padding:8px 12px;font-size:11px;font-weight:700;text-align:right;color:var(--text-hi);">Total</td>
+                  <td class="right" style="padding:8px 12px;font-size:12px;font-weight:800;">Rp 35.000</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       19 · FORM TAMBAH CUSTOMER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">19 &mdash; Form Tambah Customer</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:420px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Kasbon</span>
+            <div class="wf-topbar-title">Tambah Customer</div>
+          </div>
+        </div>
+        <div class="wf-content" style="align-items:center;">
+          <div class="wf-card" style="max-width:540px;width:100%;">
+            <div class="wf-field">
+              <div class="wf-label">Nama Customer</div>
+              <div class="wf-input" style="color:var(--text-lo);">Nama lengkap...</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Alamat</div>
+              <div class="wf-input" style="color:var(--text-lo);">Alamat...</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">No. HP / WhatsApp</div>
+              <div class="wf-input" style="color:var(--text-lo);">08xxxxxxxxxx</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Plafon Kasbon (Rp)</div>
+              <div style="display:flex;gap:0;">
+                <div style="height:32px;padding:0 10px;background:var(--fill);border:1.5px solid var(--border);border-right:none;border-radius:4px 0 0 4px;display:flex;align-items:center;font-size:11px;color:var(--text-md);">Rp</div>
+                <div class="wf-input" style="border-radius:0 4px 4px 0;flex:1;">200.000</div>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:8px;border-top:1px solid var(--border);">
+              <div class="wf-btn">Simpan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       20 · HALAMAN DETAIL CUSTOMER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">20 &mdash; Detail Customer</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:600px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Kasbon</span>
+            <div class="wf-topbar-title">Detail Customer — Dewi Rahayu</div>
+          </div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+
+          <!-- Profil card -->
+          <div class="wf-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+              <div>
+                <div style="font-size:14px;font-weight:800;color:var(--text-hi);">Dewi Rahayu</div>
+                <div style="font-size:11px;color:var(--text-lo);margin-top:2px;">📞 082233445566 &nbsp;·&nbsp; Jl. Kenanga No. 5</div>
+              </div>
+              <div class="wf-btn wf-btn-outline wf-btn-sm">Edit</div>
+            </div>
+            <!-- Plafon bar -->
+            <div style="margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+                <span style="font-size:10px;color:var(--text-lo);">Penggunaan Plafon Kasbon</span>
+                <span style="font-size:10px;font-weight:600;color:var(--text-md);">42% terpakai</span>
+              </div>
+              <div class="wf-score-bar" style="height:8px;border-radius:4px;">
+                <div class="wf-score-fill" style="width:42%;border-radius:4px;"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:10px;color:var(--text-lo);">Hutang aktif: <strong>Rp 210.000</strong></span>
+                <span style="font-size:10px;color:var(--text-lo);">Sisa plafon: <strong>Rp 290.000</strong> / Rp 500.000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid-4" style="gap:10px;">
+            <div class="wf-stat-card"><div><div class="wf-stat-label">Total Transaksi</div><div class="wf-stat-val">4</div></div></div>
+            <div class="wf-stat-card"><div><div class="wf-stat-label">Belum Lunas</div><div class="wf-stat-val">1</div></div></div>
+            <div class="wf-stat-card"><div><div class="wf-stat-label">Sudah Lunas</div><div class="wf-stat-val">2</div></div></div>
+            <div class="wf-stat-card"><div><div class="wf-stat-label">Outstanding</div><div class="wf-stat-val" style="font-size:14px;">Rp 210rb</div></div></div>
+          </div>
+
+          <!-- Riwayat hutang -->
+          <div class="wf-table-wrap">
+            <div style="padding:10px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:11px;font-weight:700;color:var(--text-md);">Riwayat Hutang</span>
+              <div class="wf-btn wf-btn-sm">+ Kasbon Baru</div>
+            </div>
+            <table class="wf-table">
+              <thead><tr>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th class="right">Jumlah</th>
+                <th class="center">Aging</th>
+                <th class="center">Status</th>
+                <th class="center">Tgl Lunas</th>
+                <th class="right">Aksi</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td>14 Mei 2025</td><td>Kredit dari NOTA-20250514-002</td>
+                  <td class="right">Rp 210.000</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">3 hari</span></td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Belum Lunas</span></td>
+                  <td class="center" style="color:var(--text-lo);">—</td>
+                  <td class="right"><div class="wf-btn wf-btn-sm">Lunasi</div></td>
+                </tr>
+                <tr style="opacity:.6;">
+                  <td>01 Apr 2025</td><td>Kredit dari NOTA-20250401-003</td>
+                  <td class="right">Rp 150.000</td>
+                  <td class="center">—</td>
+                  <td class="center"><span class="wf-pill wf-pill-dk" style="font-size:10px;">Lunas</span></td>
+                  <td class="center">15 Apr 2025</td>
+                  <td class="right">—</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="border-top:1.5px solid var(--border-dk);">
+                  <td colspan="2" style="padding:8px 12px;font-size:11px;font-weight:700;color:var(--text-hi);">Total Pernah Hutang</td>
+                  <td class="right" style="padding:8px 12px;font-size:12px;font-weight:800;">Rp 360.000</td>
+                  <td colspan="4"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       21 · HALAMAN DAFTAR HUTANG (Hutangs)
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">21 &mdash; Daftar Hutang (Kasbon)</div>
+  <div class="wf-screen">
+    <div class="wf-chrome" style="height:560px;">
+      <aside class="wf-sidebar">
+        <div class="wf-sidebar-logo">SPK System</div>
+        <div class="wf-sidebar-nav">
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Dashboard</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Supplier</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Data Produk</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembobotan Kriteria</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Rekomendasi Order</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Pembelian</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Penjualan</div>
+          <div class="wf-nav-item active"><div class="wf-nav-icon"></div> Kasbon</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Stok</div>
+          <div class="wf-nav-item"><div class="wf-nav-icon"></div> Laporan</div>
+        </div>
+        <div class="wf-sidebar-user"><div class="wf-avatar"></div><div class="wf-user-info"><div class="wf-user-name">Admin User</div><div class="wf-user-role">Super Admin</div></div></div>
+      </aside>
+      <div class="wf-main">
+        <div class="wf-topbar">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <span style="font-size:10px;color:var(--text-lo);">← Kembali ke Kasbon</span>
+            <div class="wf-topbar-title">Daftar Hutang</div>
+          </div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:11px;color:var(--text-md);">Total Piutang: <strong>Rp 1.490.000</strong></span>
+            <div class="wf-btn wf-btn-sm">+ Catat Kasbon</div>
+          </div>
+        </div>
+        <div class="wf-content" style="gap:12px;">
+
+          <!-- Filter + modal catat kasbon placeholder -->
+          <div style="display:flex;gap:6px;margin-bottom:4px;">
+            <div class="wf-tab active" style="padding:6px 14px;border:1.5px solid var(--border-dk);border-radius:4px;font-size:11px;background:var(--fill-dk);color:#fff;">Semua</div>
+            <div class="wf-tab" style="padding:6px 14px;border:1.5px solid var(--border);border-radius:4px;font-size:11px;color:var(--text-md);">Belum Lunas</div>
+            <div class="wf-tab" style="padding:6px 14px;border:1.5px solid var(--border);border-radius:4px;font-size:11px;color:var(--text-md);">Lunas</div>
+          </div>
+
+          <div class="wf-table-wrap">
+            <table class="wf-table">
+              <thead><tr>
+                <th>Customer</th>
+                <th class="right">Jumlah</th>
+                <th class="center">Tanggal</th>
+                <th class="center">Umur</th>
+                <th class="center">Status</th>
+                <th>Keterangan</th>
+                <th class="right">Aksi</th>
+              </tr></thead>
+              <tbody>
+                <!-- hijau: ≤7 hari -->
+                <tr style="background:#f9fafb;">
+                  <td><strong>Dewi Rahayu</strong></td>
+                  <td class="right">Rp 210.000</td>
+                  <td class="center">14 Mei 2025</td>
+                  <td class="center">3 hari</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Belum Lunas</span></td>
+                  <td style="font-size:10px;color:var(--text-lo);">Kredit NOTA-001</td>
+                  <td class="right">
+                    <div class="wf-btn wf-btn-sm" style="margin-right:4px;">Lunasi</div>
+                    <div class="wf-btn wf-btn-danger wf-btn-sm">Hapus</div>
+                  </td>
+                </tr>
+                <!-- kuning: 8-30 hari -->
+                <tr style="background:#f9fafb;">
+                  <td><strong>Agus Firmansyah</strong></td>
+                  <td class="right">Rp 61.000</td>
+                  <td class="center">27 Apr 2025</td>
+                  <td class="center">20 hari</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Belum Lunas</span></td>
+                  <td style="font-size:10px;color:var(--text-lo);">Kredit NOTA-005</td>
+                  <td class="right">
+                    <div class="wf-btn wf-btn-sm" style="margin-right:4px;">Lunasi</div>
+                    <div class="wf-btn wf-btn-danger wf-btn-sm">Hapus</div>
+                  </td>
+                </tr>
+                <!-- merah: >30 hari -->
+                <tr style="background:#f9fafb;">
+                  <td><strong>Siti Aminah</strong></td>
+                  <td class="right">Rp 74.000</td>
+                  <td class="center">12 Apr 2025</td>
+                  <td class="center">35 hari</td>
+                  <td class="center"><span class="wf-pill wf-pill-dk" style="font-size:10px;">Belum Lunas</span></td>
+                  <td style="font-size:10px;color:var(--text-lo);">Kredit NOTA-003</td>
+                  <td class="right">
+                    <div class="wf-btn wf-btn-sm" style="margin-right:4px;">Lunasi</div>
+                    <div class="wf-btn wf-btn-danger wf-btn-sm">Hapus</div>
+                  </td>
+                </tr>
+                <!-- lunas -->
+                <tr style="opacity:.55;">
+                  <td>Rina Kusumawati</td>
+                  <td class="right">Rp 48.000</td>
+                  <td class="center">07 Apr 2025</td>
+                  <td class="center">—</td>
+                  <td class="center"><span class="wf-pill" style="font-size:10px;">Lunas</span></td>
+                  <td style="font-size:10px;color:var(--text-lo);">Kredit NOTA-002</td>
+                  <td class="right">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tombol Daftar Hutang di Kasbon — info box -->
+          <div style="padding:10px 14px;background:var(--fill);border:1.5px solid var(--border);border-radius:6px;font-size:11px;color:var(--text-md);">
+            <strong>Catatan:</strong> Halaman ini diakses melalui tombol <span class="wf-pill wf-pill-dk" style="font-size:10px;">Daftar Hutang</span> yang tersedia di header halaman Kasbon, memberikan tampilan lintas-customer untuk seluruh piutang aktif.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       22 · MODAL TAMBAH / EDIT USER
+  ══════════════════════════════════════════════ -->
+  <div class="wf-page-label">22 &mdash; Modal Tambah / Edit User</div>
+  <div class="wf-screen">
+    <div class="wf-modal-wrap" style="height:440px;">
+      <div style="position:absolute;inset:0;background:var(--bg);display:flex;">
+        <div style="width:200px;background:var(--fill-dk);"></div>
+        <div style="flex:1;"></div>
+      </div>
+      <div class="wf-modal-overlay">
+        <div class="wf-modal" style="width:420px;">
+          <div class="wf-modal-title">Tambah User</div>
+          <div class="wf-field">
+            <div class="wf-label">Nama Lengkap</div>
+            <div class="wf-input" style="color:var(--text-lo);">Nama user...</div>
+          </div>
+          <div class="wf-field">
+            <div class="wf-label">Email</div>
+            <div class="wf-input" style="color:var(--text-lo);">user@example.com</div>
+          </div>
+          <div class="grid-2">
+            <div class="wf-field">
+              <div class="wf-label">Password</div>
+              <div class="wf-input">••••••••</div>
+            </div>
+            <div class="wf-field">
+              <div class="wf-label">Konfirmasi Password</div>
+              <div class="wf-input">••••••••</div>
+            </div>
+          </div>
+          <div class="wf-field">
+            <div class="wf-label">Role</div>
+            <div class="wf-select"><span style="color:var(--text-lo);">— Pilih Role —</span><span class="wf-select-arrow">▾</span></div>
+          </div>
+          <div style="font-size:10px;color:var(--text-lo);margin-top:-6px;margin-bottom:10px;">
+            Opsi: Admin, Super Admin
+          </div>
+          <!-- catatan edit mode -->
+          <div style="padding:8px 10px;background:var(--fill);border-radius:4px;font-size:10px;color:var(--text-md);margin-bottom:4px;">
+            Saat mode <strong>Edit</strong>: kolom Password bersifat opsional — kosongkan jika tidak ingin mengubah password.
+          </div>
+          <div class="wf-modal-footer">
+            <div class="wf-btn wf-btn-outline">Batal</div>
+            <div class="wf-btn">Simpan User</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <div style="text-align:center;padding:24px 0;border-top:1.5px solid var(--border);margin-top:16px;">
+    <div style="font-size:10px;color:var(--text-lo);letter-spacing:.1em;text-transform:uppercase;">
+      SPK System · Lo-Fi Wireframe · 22 Screens · Grayscale Figma Style
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
